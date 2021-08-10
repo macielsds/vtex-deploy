@@ -37,19 +37,19 @@ module.exports = async function(opts) {
       }
     }, function(error, response, body){
       if(error) {
-        console.error('File was not saved: ', error);
+        console.error('\u001b[31m[ERROR] \u001b[0mFile was not saved: ', error);
       }
 
       if(response.statusCode === 200 && !/originalMessage/.test(body)) {
-        console.log(`* File ${opts.name} was saved on ${opts.store}`);
+        console.log(`\u001b[32m[SUCCESS] \u001b[0mFile ${opts.name} was saved on ${opts.store}`);
       } else {
-        console.error(`* File was not saved!`);
+        console.error(`\u001b[31m[ERROR] \u001b[0mFile was not saved!`);
         console.error(`* check the logs! ./.vtex-deploy`);
       }
 
       logger(opts, body)
     });
   } catch(err) { 
-    console.error(`File was not saved error: ${err}`); 
+    console.error(`\u001b[31m[ERROR] \u001b[0mFile was not saved error: ${err}`); 
   }
 }

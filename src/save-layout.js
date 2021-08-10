@@ -39,15 +39,15 @@ module.exports = async function(opts) {
         console.error('Save Layout: ', error);
       }
       if(response.statusCode === 200 && !/originalMessage/.test(body)) {
-        console.log(`* Save Layout was saved on ${opts.store}`);
+        console.log(`\u001b[32m[SUCCESS] \u001b[0mSave Layout was saved on ${opts.store}`);
       } else {
-        console.error(`* Save Layout was not saved!`);
+        console.error(`\u001b[31m[ERROR] \u001b[0mSave Layout was not saved!`);
         console.error(`* check the logs! ./.vtex-deploy`);
       }
 
       logger(opts, body)
     });
   } catch(err) { 
-    console.error(`Template was not saved error: ${err}`); 
+    console.error(`\u001b[31m[ERROR] \u001b[0mTemplate was not saved error: ${err}`); 
   }
 }

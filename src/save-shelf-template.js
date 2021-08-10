@@ -44,17 +44,17 @@ module.exports = async function(opts, cb) {
     }, function(error, response, body){
       let success = false;
       if(error) {
-        log && console.error(`Shelf Template ${opts.name} was not saved: `, error);
+        log && console.error(`\u001b[31m[ERROR] \u001b[0mShelf Template ${opts.name} was not saved: `, error);
       }
       if(/\/admin\/login\?portal/.test(body)){
-        log && console.warn(`* invalid or expired cookie`);
-        log && console.error(`* Shelf Template ${opts.name} was not saved! (${response.statusCode})`);
+        log && console.warn(`\u001b[31m[ERROR] \u001b[0minvalid or expired cookie`);
+        log && console.error(`\u001b[31m[ERROR] \u001b[0mShelf Template ${opts.name} was not saved! (${response.statusCode})`);
       }
       else if((response.statusCode < 400 || response.statusCode > 600) && !/originalMessage/.test(body)) {
-        log && console.log(`* Shelf Template ${opts.name} was saved on ${opts.store}`);
+        log && console.log(`\u001b[32m[SUCCESS] \u001b[0mShelf Template ${opts.name} was saved on ${opts.store}`);
         success = true;
       } else {
-        log && console.error(`* Shelf Template ${opts.name} was not saved! (${response.statusCode})`);
+        log && console.error(`\u001b[31m[ERROR] \u001b[0mShelf Template ${opts.name} was not saved! (${response.statusCode})`);
         log && console.error(`* check the logs! ./.vtex-deploy`);
       }
 
@@ -64,7 +64,7 @@ module.exports = async function(opts, cb) {
       }
     });
   } catch(err) { 
-    log && console.error(`Shelf Template was not saved error: ${err}`);
+    log && console.error(`\u001b[31m[ERROR] \u001b[0mShelf Template was not saved error: ${err}`);
     if(typeof cb == 'function'){
       cb(null);
     }

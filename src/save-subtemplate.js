@@ -40,13 +40,13 @@ module.exports = async function(opts, cb) {
     }, function(error, response, body){
       let success = false;
       if(error) {
-        log && console.error(`Subtemplate ${opts.name} was not saved: `, error);
+        log && console.error(`\u001b[31m[ERROR] \u001b[0mSubtemplate ${opts.name} was not saved: `, error);
       }
       if(response.statusCode === 200 && !/originalMessage/.test(body)) {
-        opts.log !== false && log && console.log(`* Subtemplate ${opts.name} was saved on ${opts.store}`);
+        opts.log !== false && log && console.log(`\u001b[32m[SUCCESS] \u001b[0mSubtemplate ${opts.name} was saved on ${opts.store}`);
         success = true;
       } else {
-        log && console.error(`* Subtemplate ${opts.name} was not saved!`);
+        log && console.error(`\u001b[31m[ERROR] \u001b[0mSubtemplate ${opts.name} was not saved!`);
         log && console.error(`* check the logs! ./.vtex-deploy`);
       }
 
@@ -56,7 +56,7 @@ module.exports = async function(opts, cb) {
       }
     });
   } catch(err) { 
-    log && console.error(`SubTemplate ${opts.name} was not saved error: ${err}`);
+    log && console.error(`\u001b[31m[ERROR] \u001b[0mSubTemplate ${opts.name} was not saved error: ${err}`);
     if(typeof cb == 'function'){
       cb(null);
     }
